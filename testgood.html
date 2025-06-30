@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR SensoCare - Solutions immersives</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <style>
+        :root {
+            --primary: #6a5acd;
+            --primary-light: #8c7ae6;
+            --primary-dark: #4a3cb0;
+            --secondary: #ff79c6;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --success: #50fa7b;
+            --warning: #ffb86c;
+            --gray: #6272a4;
+            --light-gray: #f1f2f6;
+            --card-bg: rgba(26, 26, 46, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: var(--light);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(149, 117, 205, 0.3);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            text-align: center;
+            padding: 0 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo i {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(255, 121, 198, 0.5);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--light-gray);
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            padding: 0 1.5rem;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(140, 122, 230, 0.5);
+        }
+        
+        .section-description {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            max-width: 800px;
+            margin: 1.5rem auto 3rem;
+            line-height: 1.7;
+            font-weight: 300;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .environments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .environment-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transform-style: preserve-3d;
+        }
+        
+        .environment-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                        0 0 30px rgba(140, 122, 230, 0.2);
+            border-color: rgba(149, 117, 205, 0.5);
+        }
+        
+        .card-header {
+            padding: 1.8rem 1.8rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+        }
+        
+        .card-header h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+        
+        .card-header p {
+            color: var(--light-gray);
+            line-height: 1.7;
+            font-size: 1rem;
+            min-height: 100px;
+        }
+        
+        .card-content {
+            padding: 1.8rem;
+        }
+        
+        .time-options {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        .time-option {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .time-option:hover {
+            background: rgba(106, 90, 205, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .time-option.selected {
+            background: rgba(106, 90, 205, 0.5);
+            border: 1px solid var(--primary-light);
+            box-shadow: 0 0 15px rgba(140, 122, 230, 0.4);
+        }
+        
+        .time-option::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .time-option.selected::after {
+            opacity: 1;
+        }
+        
+        .time-option input {
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .time-option label {
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .view-button {
+            display: block;
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .view-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .view-button:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .view-button:hover::before {
+            left: 100%;
+        }
+        
+        .view-button i {
+            margin-left: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .view-button:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Pannellum Viewer Container */
+        .pannellum-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1000;
+            display: none;
+        }
+        
+        #pannellum-viewer {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .pannellum-controls {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            z-index: 1001;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .pannellum-button {
+            background: rgba(30, 30, 46, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pannellum-button:hover {
+            background: rgba(106, 90, 205, 0.7);
+            transform: scale(1.1);
+        }
+        
+        .environment-info {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            background: rgba(10, 10, 20, 0.85);
+            padding: 1.2rem 1.8rem;
+            border-radius: 15px;
+            max-width: 350px;
+            z-index: 1001;
+            border: 1px solid rgba(149, 117, 205, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .environment-info h3 {
+            color: var(--primary-light);
+            margin-bottom: 0.8rem;
+            font-size: 1.6rem;
+        }
+        
+        .environment-info p {
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+        }
+        
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 7px solid rgba(106, 90, 205, 0.3);
+            border-top: 7px solid var(--primary-light);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 2rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: var(--light-gray);
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            width: 300px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 6rem;
+            padding: 3rem;
+            color: var(--light-gray);
+            font-size: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(10, 10, 20, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .environments-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .time-options {
+                flex-direction: column;
+            }
+            
+            .environment-info {
+                max-width: 280px;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-vr-cardboard"></i>
+                    <h1>VR SensoCare</h1>
+                </div>
+                <p class="subtitle">Solutions immersives en réalité virtuelle pour l’audiologie et l’orthophonie</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="section-title">
+            <h2>Démonstrations 360°</h2>
+        </div>
+        <p class="section-description">Découvrez nos environnements virtuels spécialement conçus pour l’apaisement sensoriel et la thérapie. Chaque démo offre une expérience immersive unique adaptée aux besoins spécifiques des personnes autistes.</p>
+
+        <div class="environments-grid">
+            <!-- Plage Sereline -->
+            <div class="environment-card">
+                <div class="card-header">
+                    <h3>Plage Sereline</h3>
+                    <p>Détendez-vous au bord d’une plage calme avec le bruit équilibré des vagues. Environnement adaptable dans tous les établissements, avec un contrôle de l’intensité sensorielle.</p>
+                </div>
+                <div class="card-content">
+                    <div class="time-options">
+                        <div class="time-option">
+                            <input type="checkbox" id="plage-0">
+                            <label for="plage-0">0 min</label>
+                        </div>
+                        <div class="time-option">
+                            <input type="checkbox" id="plage-1">
+                            <label for="plage-1">1 min</label>
+                        </div>
+                    </div>
+                    <button class="view-button" data-env="plage">Voir en VR <i class="fas fa-glasses"></i></button>
+                </div>
+            </div>
+
+            <!-- Forêt Enchantée -->
+            <div class="environment-card">
+                <div class="card-header">
+                    <h3>Forêt Enchantée</h3>
+                    <p>Promenez-vous dans une forêt paisible avec des effets sensoriels subtils. Sons de la nature, lumière douce et textures virtuelles apaisantes.</p>
+                </div>
+                <div class="card-content">
+                    <div class="time-options">
+                        <div class="time-option">
+                            <input type="checkbox" id="foret-5">
+                            <label for="foret-5">5 min</label>
+                        </div>
+                        <div class="time-option">
+                            <input type="checkbox" id="foret-6">
+                            <label for="foret-6">6 min</label>
+                        </div>
+                    </div>
+                    <button class="view-button" data-env="foret">Voir en VR <i class="fas fa-glasses"></i></button>
+                </div>
+            </div>
+
+            <!-- Montagne Majestueuse -->
+            <div class="environment-card">
+                <div class="card-header">
+                    <h3>Montagne Majestueuse</h3>
+                    <p>Contemplez des paysages de montagne majestueux avec une lumière douce et des couleurs apaisantes. Expérience visuelle sans mouvement brusque.</p>
+                </div>
+                <div class="card-content">
+                    <div class="time-options">
+                        <div class="time-option">
+                            <input type="checkbox" id="montagne-17">
+                            <label for="montagne-17">17 min</label>
+                        </div>
+                        <div class="time-option">
+                            <input type="checkbox" id="montagne-19">
+                            <label for="montagne-19">19 min</label>
+                        </div>
+                    </div>
+                    <button class="view-button" data-env="montagne">Voir en VR <i class="fas fa-glasses"></i></button>
+                </div>
+            </div>
+
+            <!-- Jardin Fleuri -->
+            <div class="environment-card">
+                <div class="card-header">
+                    <h3>Jardin Fleuri</h3>
+                    <p>Explorez un jardin calme avec une variété de fleurs aux tons pastels. Environnement visuel riche mais organisé pour éviter la surcharge sensorielle.</p>
+                </div>
+                <div class="card-content">
+                    <div class="time-options">
+                        <div class="time-option">
+                            <input type="checkbox" id="jardin-14">
+                            <label for="jardin-14">14 min</label>
+                        </div>
+                        <div class="time-option">
+                            <input type="checkbox" id="jardin-15">
+                            <label for="jardin-15">15 min</label>
+                        </div>
+                    </div>
+                    <button class="view-button" data-env="jardin">Voir en VR <i class="fas fa-glasses"></i></button>
+                </div>
+            </div>
+
+            <!-- Jardin Lunaire -->
+            <div class="environment-card">
+                <div class="card-header">
+                    <h3>Jardin Lunaire</h3>
+                    <p>Découvrez un jardin magique sous la lumière de la lune. Environnement visuel riche avec des éléments interactifs sensoriels légers.</p>
+                </div>
+                <div class="card-content">
+                    <div class="time-options">
+                        <div class="time-option">
+                            <input type="checkbox" id="lunaire-10">
+                            <label for="lunaire-10">10 min</label>
+                        </div>
+                        <div class="time-option">
+                            <input type="checkbox" id="lunaire-16">
+                            <label for="lunaire-16">16 min</label>
+                        </div>
+                    </div>
+                    <button class="view-button" data-env="lunaire">Voir en VR <i class="fas fa-glasses"></i></button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pannellum Viewer -->
+    <div class="pannellum-container" id="pannellumViewer">
+        <div class="pannellum-controls">
+            <button class="pannellum-button" id="fullscreenButton">
+                <i class="fas fa-expand"></i>
+            </button>
+            <button class="pannellum-button" id="vrButton">
+                <i class="fas fa-vr-cardboard"></i>
+            </button>
+            <button class="pannellum-button" id="closeViewer">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="environment-info">
+            <h3 id="currentEnvName">Plage Sereline</h3>
+            <p id="currentEnvDesc">Détendez-vous au bord d’une plage calme...</p>
+        </div>
+        
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="spinner"></div>
+            <div class="loading-text">Chargement de l'environnement...</div>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+        </div>
+        
+        <div id="pannellum-viewer"></div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 VR SensoCare - Solutions immersives en réalité virtuelle pour la thérapie sensorielle</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        // Viewer functionality
+        const pannellumViewer = document.getElementById('pannellumViewer');
+        const closeViewer = document.getElementById('closeViewer');
+        const fullscreenButton = document.getElementById('fullscreenButton');
+        const vrButton = document.getElementById('vrButton');
+        const viewButtons = document.querySelectorAll('.view-button');
+        const currentEnvName = document.getElementById('currentEnvName');
+        const currentEnvDesc = document.getElementById('currentEnvDesc');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const progressBar = document.getElementById('progressBar');
+        let viewer = null;
+        
+        // Environment data with image paths
+        const environmentData = {
+            plage: {
+                name: 'Plage Sereline',
+                desc: 'Détendez-vous au bord d’une plage calme avec le bruit équilibré des vagues. Environnement adaptable dans tous les établissements, avec un contrôle de l’intensité sensorielle.',
+                image: 'p5.jpg'
+            },
+            foret: {
+                name: 'Forêt Enchantée',
+                desc: 'Promenez-vous dans une forêt paisible avec des effets sensoriels subtils. Sons de la nature, lumière douce et textures virtuelles apaisantes.',
+                image: 'p2.jpg'
+            },
+            montagne: {
+                name: 'Montagne Majestueuse',
+                desc: 'Contemplez des paysages de montagne majestueux avec une lumière douce et des couleurs apaisantes. Expérience visuelle sans mouvement brusque.',
+                image: 'p5.jpg'
+            },
+            jardin: {
+                name: 'Jardin Fleuri',
+                desc: 'Explorez un jardin calme avec une variété de fleurs aux tons pastels. Environnement visuel riche mais organisé pour éviter la surcharge sensorielle.',
+                image: 'p5.jpg'
+            },
+            lunaire: {
+                name: 'Jardin Lunaire',
+                desc: 'Découvrez un jardin magique sous la lumière de la lune. Environnement visuel riche avec des éléments interactifs sensoriels légers.',
+                image: 'p5.jpg'
+            }
+        };
+        
+        // Simulate image loading progress
+        function simulateProgress() {
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Hide loading overlay after a short delay
+                    setTimeout(() => {
+                        loadingOverlay.style.display = 'none';
+                    }, 500);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                }
+            }, 20);
+        }
+        
+        // Initialize Pannellum viewer
+        function initViewer(imageUrl) {
+            if (viewer) {
+                viewer.destroy();
+            }
+            
+            viewer = pannellum.viewer('pannellum-viewer', {
+                "type": "equirectangular",
+                "panorama": imageUrl,
+                "autoLoad": true,
+                "autoRotate": -2,
+                "showZoomCtrl": true,
+                "showFullscreenCtrl": false,
+                "compass": true,
+                "hotSpots": [
+                    {
+                        "pitch": -2,
+                        "yaw": 0,
+                        "type": "info",
+                        "text": "Bienvenue dans VR SensoCare"
+                    }
+                ]
+            });
+            
+            // Hide loading overlay when image is loaded
+            viewer.on('load', function() {
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            });
+        }
+        
+        // Open Viewer
+        viewButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const env = button.getAttribute('data-env');
+                
+                // Set environment info
+                currentEnvName.textContent = environmentData[env].name;
+                currentEnvDesc.textContent = environmentData[env].desc;
+                
+                // Show loading overlay
+                loadingOverlay.style.display = 'flex';
+                progressBar.style.width = '0%';
+                
+                // Show viewer
+                pannellumViewer.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Simulate loading progress
+                simulateProgress();
+                
+                // Initialize the viewer after a short delay
+                setTimeout(() => {
+                    initViewer(environmentData[env].image);
+                }, 1000);
+            });
+        });
+        
+        // Close Viewer
+        closeViewer.addEventListener('click', () => {
+            pannellumViewer.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Toggle fullscreen mode
+        fullscreenButton.addEventListener('click', () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                pannellumViewer.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            }
+        });
+        
+        // Toggle VR mode
+        vrButton.addEventListener('click', () => {
+            if (viewer) {
+                viewer.toggleFullscreen();
+                viewer.toggleVR();
+            }
+        });
+        
+        // Handle fullscreen change events
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                fullscreenButton.innerHTML = '<i class="fas fa-compress"></i>';
+            } else {
+                fullscreenButton.innerHTML = '<i class="fas fa-expand"></i>';
+            }
+        });
+        
+        // Time option selection
+        const timeOptions = document.querySelectorAll('.time-option');
+        timeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from siblings
+                const siblings = Array.from(this.parentNode.children);
+                siblings.forEach(sib => sib.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Toggle checkbox
+                const checkbox = this.querySelector('input');
+                checkbox.checked = !checkbox.checked;
+            });
+        });
+    </script>
+</body>
+</html>

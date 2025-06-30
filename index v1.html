@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHISENS VR - Solutions VR pour l'autisme et l'orthophonie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sky-blue: #87CEEB;
+            --mint-green: #98FB98;
+            --light-gray: #f5f5f5;
+            --text-dark: #333;
+            --soft-blue: #e6f7ff;
+            --light-mint: #e8f5e9;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint-green));
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: white;
+            color: var(--sky-blue);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin: 10px 5px;
+        }
+        
+        .btn-primary {
+            background: var(--sky-blue);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%2387CEEB" opacity="0.1"/></svg>');
+            background-size: 200px;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--sky-blue);
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #555;
+        }
+        
+        .btn-group {
+            margin-top: 1.5rem;
+        }
+        
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            width: 250px;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--sky-blue);
+            margin-bottom: 20px;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--sky-blue), var(--mint-green));
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--sky-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.2);
+        }
+        
+        /* Dashboard Styles */
+        .dashboard-header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--sky-blue), var(--mint-green));
+        }
+        
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint-green));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .status {
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 1rem 0;
+            display: inline-block;
+        }
+        
+        .status.pending {
+            background: #FFF3CD;
+            color: #856404;
+        }
+        
+        .status.available {
+            background: #D4EDDA;
+            color: #155724;
+        }
+        
+        .status.used {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+        
+        .vr-preview {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(rgba(135, 206, 235, 0.2), rgba(152, 251, 152, 0.2)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" rx="15" fill="%2387CEEB" opacity="0.2"/></svg>');
+            background-size: cover;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sky-blue);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--sky-blue);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sky-blue), var(--mint-green));
+            border-radius: 2px;
+        }
+        
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--sky-blue), var(--mint-green));
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--sky-blue);
+        }
+        
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        
+        .member-photo {
+            height: 200px;
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint-green));
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: white;
+            color: var(--sky-blue);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+        
+        /* VR Experience Section */
+     
+        
+        .vr-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 700px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--sky-blue);
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.8rem 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+           
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateX(120%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification.success {
+            background: #4CAF50;
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: #F44336;
+            transform: translateX(0);
+        }
+        
+        .notification i {
+            font-size: 1.2rem;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Form messages */
+        .form-message {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* 360 Demo Styles */
+        .vr-demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .vr-viewer {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(rgba(135, 206, 235, 0.1), rgba(152, 251, 152, 0.1)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%2387CEEB" opacity="0.05"/></svg>');
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .vr-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .vr-control-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--sky-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .vr-control-btn:hover {
+            background: var(--mint-green);
+            transform: scale(1.1);
+        }
+        
+        .vr-scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .scene-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .scene-description {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .vr-demo-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .vr-demo-info h3 {
+            color: var(--sky-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .vr-demo-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .vr-demo-info li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .vr-demo-info li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--mint-green);
+            font-weight: bold;
+        }
+        
+        /* Logout button */
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--sky-blue);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 15px;
+        }
+        
+        .logout-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification -->
+    <div class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span class="message"></span>
+    </div>
+    
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-vr-cardboard"></i>
+                    ARCHISENS VR
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> À propos</a></li>
+                    <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                    <li><a href="#catalog"><i class="fas fa-book"></i> Catalogue</a></li>
+                    <li><a href="#register"><i class="fas fa-user-plus"></i> Créer un compte</a></li>
+                    <li><a href="#login"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Homepage -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Solutions VR pour l'autisme et l'orthophonie</h1>
+            <p>Technologie immersive pour le soutien thérapeutique, le bien-être sensoriel et l'accompagnement personnalisé</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Thérapie douce</h3>
+                    <p>Approche sensorielle adaptée aux besoins spécifiques</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Accompagnement</h3>
+                    <p>Support professionnel pour familles et spécialistes</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>Solutions technologiques de pointe</p>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <a href="#register" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Créer un compte
+                </a>
+                <a href="#services" class="btn">
+                    <i class="fas fa-concierge-bell"></i> Découvrir nos services
+                </a>
+                <a href="#test-vr" class="btn">
+                    <i class="fas fa-vr-cardboard"></i> Accéder à un test VR gratuit
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Page -->
+    <section id="register">
+        <div class="container">
+            <h2 class="section-title">Créer un compte</h2>
+            <div class="form-container">
+                <form id="registration-form">
+                    <div id="form-messages"></div>
+                    
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i> Nom complet</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile"><i class="fas fa-users"></i> Profil</label>
+                        <select id="profile" required>
+                            <option value="">Sélectionnez votre profil</option>
+                            <option value="orthophoniste">Orthophoniste</option>
+                            <option value="centre">Centre spécialisé</option>
+                            <option value="famille">Famille</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="needs"><i class="fas fa-comment-alt"></i> Besoins spécifiques</label>
+                        <textarea id="needs" rows="4" placeholder="Décrivez vos besoins ou attentes spécifiques..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="register-btn">
+                        <i class="fas fa-user-plus"></i> Créer mon compte
+                    </button>
+                    <p style="text-align: center; margin-top: 15px;">
+                        Vous avez déjà un compte? <a href="#login" style="color: var(--sky-blue); font-weight: 600;">Connectez-vous</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Page -->
+    <section id="login">
+        <div class="container">
+            <h2 class="section-title">Connexion</h2>
+            <div class="form-container">
+                <form id="login-form">
+                    <div id="login-messages"></div>
+                    
+                    <div class="form-group">
+                        <label for="login-email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password"><i class="fas fa-lock"></i> Mot de passe</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Se connecter
+                    </button>
+                    <p style="text-align: center; margin-top: 15px;">
+                        Pas encore de compte? <a href="#register" style="color: var(--sky-blue); font-weight: 600;">Créer un compte</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Dashboard -->
+    <section id="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="section-title">Mon Espace Personnel</h2>
+            </div>
+            <div class="dashboard-card">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3>Bonjour, <span id="user-firstname">Marie</span> !</h3>
+                <p><span id="user-profile">Orthophoniste</span> | <span id="user-email">marie@example.com</span></p>
+                
+                <div class="status available">Statut: Disponible</div>
+                <p>Votre espace VR est prêt à être exploré</p>
+                
+                <div class="vr-preview">
+                    <div>
+                        <i class="fas fa-vr-cardboard" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <p>Expérience VR 360° pour l'apaisement sensoriel</p>
+                    </div>
+                </div>
+                
+                <a href="#test-vr" class="btn btn-primary" id="vr-access-btn">
+                    <i class="fas fa-play-circle"></i> Accéder à mon espace VR test
+                </a>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+            
+            <div class="dashboard-card" style="display: none;" id="used-test-card">
+                <div class="status used">Statut: Test déjà utilisé</div>
+                <p>Vous avez déjà utilisé votre test gratuit. Contactez-nous pour plus d'informations.</p>
+                <a href="#contact" class="btn">
+                    <i class="fas fa-envelope"></i> Nous contacter
+                </a>
+            </div>
+        </div>
+    </section>
+
+   
+    <!-- About Page -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">À propos de nous</h2>
+            <div class="about-content">
+                <p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto 2rem; text-align: center;">
+                    VR SensoCare est né de la rencontre entre des spécialistes de l'autisme, des orthophonistes et des experts en réalité virtuelle. Notre mission : développer des solutions innovantes pour améliorer le bien-être et les capacités de communication des personnes autistes.
+                </p>
+                
+                <h3 style="text-align: center; margin: 2rem 0 1.5rem; color: var(--sky-blue);">Notre équipe</h3>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Dr Lorem ipsum dolor sit.</h4>
+                            <p>Orthophoniste spécialisée</p>
+                            <p>lor6
+
+                            </p>
+                        </div>
+                    </div>
+                    
+               
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Élise Dubois</h4>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                            <p>Lorem, ipsum.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="text-align: center; margin: 3rem 0 1.5rem; color: var(--sky-blue);">Partenaires</h3>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque ratione animi obcaecati dolore ex a odio, incidunt facere laboriosam nam!                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Nos Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3>Espaces Immersifs VR</h3>
+                    <p>Création d'environnements personnalisés pour l'apaisement et la stimulation sensorielle</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Accompagnement Orthophonique</h3>
+                    <p>Séances en ligne ou en centre avec des professionnels spécialisés</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Aménagement d'espaces</h3>
+                    <p>Conception de chambres et salles sensorielles adaptées</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Sensibilisation</h3>
+                    <p>Formations et ressources pour familles et professionnels</p>
+                </div>
+            </div>
+            
+           
+        </div>
+    </section>
+
+    <!-- Catalog Page -->
+    <section id="catalog">
+        <div class="container">
+            <h2 class="section-title">Catalogue Autisme & VR</h2>
+            <div class="catalog-content" style="max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.08);">
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--sky-blue);">Nos solutions</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="color: var(--sky-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-list"></i> Types d'espaces
+                        </h4>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--mint-green);"></i> 
+                                <span>Environnements apaisants</span>
+                            </li>
+                            <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--mint-green);"></i> 
+                                <span>Stimulation sensorielle contrôlée</span>
+                            </li>
+                            <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--mint-green);"></i> 
+                                <span>Scénarios d'interaction sociale</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: var(--sky-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-tools"></i> Matériel recommandé
+                        </h4>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px;">
+                                <i class="fas fa-vr-cardboard" style="color: var(--sky-blue);"></i> 
+                                <span>Casques VR Oculus Quest 2/3</span>
+                            </li>
+                            <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px;">
+                                <i class="fas fa-headphones" style="color: var(--sky-blue);"></i> 
+                                <span>Casque audio à réduction de bruit</span>
+                            </li>
+                            <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px;">
+                                <i class="fas fa-mobile-alt" style="color: var(--sky-blue);"></i> 
+                                <span>Application mobile de contrôle</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Page -->
+    <section id="exercises">
+        <div class="container">
+            <div class="dashboard-card">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Consignes / Exercices Orthophonie</h2>
+                <div class="status pending" style="margin: 0 auto 1.5rem;">Bientôt disponible</div>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem;">
+                    Nous travaillons actuellement sur une plateforme d'exercices orthophoniques interactifs avec suivi professionnel. Cette fonctionnalité sera disponible dans les prochaines semaines.
+                </p>
+                
+                <div style="background: var(--light-gray); padding: 1.5rem; border-radius: 10px; margin: 2rem 0; text-align: center;">
+                    <h3 style="color: var(--sky-blue); margin-bottom: 1rem;">Exemple d'exercice à venir</h3>
+                    <p>Reconnaissance d'émotions dans des scènes sociales virtuelles</p>
+                </div>
+                
+                <p style="text-align: center; font-style: italic;">
+                    Un accompagnement professionnel personnalisé sera proposé avec des forfaits adaptés à chaque besoin.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>VR SensoCare</h3>
+                    <p>Solutions innovantes en réalité virtuelle pour l'accompagnement des personnes autistes et le soutien orthophonique.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> À propos</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="#catalog"><i class="fas fa-chevron-right"></i> Catalogue</a></li>
+                        <li><a href="#register"><i class="fas fa-chevron-right"></i> Créer un compte</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Rue Innovation, Paris</a></li>
+                        <li><a href="tel:+33123456789"><i class="fas fa-phone"></i> +33 1 23 45 67 89</a></li>
+                        <li><a href="mailto:contact@vrsensocare.fr"><i class="fas fa-envelope"></i> contact@vrsensocare.fr</a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Lundi-Vendredi: 9h-18h</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 VR SensoCare - Tous droits réservés</p>
+                <p>Solutions innovantes pour l'autisme et l'orthophonie</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const registerForm = document.getElementById('registration-form');
+        const loginForm = document.getElementById('login-form');
+        const registerBtn = document.getElementById('register-btn');
+        const loginBtn = document.getElementById('login-btn');
+        const notification = document.querySelector('.notification');
+        const messageEl = document.querySelector('.message');
+        const formMessages = document.getElementById('form-messages');
+        const loginMessages = document.getElementById('login-messages');
+        const vrAccessBtn = document.getElementById('vr-access-btn');
+        const usedTestCard = document.getElementById('used-test-card');
+        const logoutBtn = document.getElementById('logout-btn');
+        const vrScene = document.getElementById('vr-scene');
+        
+        // Scene buttons
+        const sceneButtons = [
+            document.getElementById('scene1-btn'),
+            document.getElementById('scene2-btn'),
+            document.getElementById('scene3-btn'),
+            document.getElementById('scene4-btn')
+        ];
+        
+        // Scene data
+        const scenes = [
+            {
+                title: "Forêt Apaisante",
+                description: "Promenez-vous dans une forêt paisible avec des effets sensoriels contrôlés. Sons de la nature, lumière douce et textures visuelles apaisantes.",
+                icon: "fa-tree",
+                bg: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            },
+            {
+                title: "Plage Sereine",
+                description: "Détendez-vous au bord d'une plage calme avec le bruit régulier des vagues. Environnement lumineux mais non éblouissant, avec un contrôle de l'intensité sonore.",
+                icon: "fa-water",
+                bg: "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1333&q=80"
+            },
+            {
+                title: "Ciel Étoilé",
+                description: "Observez un ciel étoilé avec des effets visuels doux et apaisants. Expérience sensorielle légère idéale pour la relaxation avant le sommeil.",
+                icon: "fa-cloud",
+                bg: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1194&q=80"
+            },
+            {
+                title: "Jardin Lunaire",
+                description: "Explorez un jardin magique sous la lumière de la lune. Environnement visuel doux avec des éléments interactifs sensoriels légers.",
+                icon: "fa-moon",
+                bg: "https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            }
+        ];
+        
+        // Show notification
+        function showNotification(message, isSuccess = true) {
+            notification.classList.remove('success', 'error');
+            notification.classList.add(isSuccess ? 'success' : 'error');
+            
+            const icon = notification.querySelector('i');
+            icon.className = isSuccess ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            
+            messageEl.textContent = message;
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(120%)';
+            }, 3000);
+        }
+        
+        // Check if user is logged in
+        function checkLogin() {
+            const user = JSON.parse(localStorage.getItem('vr_user'));
+            if (user) {
+                // Update dashboard with user info
+                document.getElementById('user-firstname').textContent = user.name.split(' ')[0];
+                document.getElementById('user-email').textContent = user.email;
+                document.getElementById('user-profile').textContent = 
+                    user.profile === 'orthophoniste' ? 'Orthophoniste' : 
+                    user.profile === 'centre' ? 'Centre spécialisé' : 'Famille';
+                
+                // Hide login/register, show dashboard
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('register').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                
+                return true;
+            }
+            return false;
+        }
+        
+        // Handle registration
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const profile = document.getElementById('profile').value;
+            const needs = document.getElementById('needs').value;
+            
+            // Show loading state
+            registerBtn.innerHTML = '<span class="spinner"></span> Création du compte...';
+            registerBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Save user to localStorage
+                const user = {
+                    name: name,
+                    email: email,
+                    password: password,
+                    profile: profile,
+                    needs: needs,
+                    vrTestUsed: false
+                };
+                
+                localStorage.setItem('vr_user', JSON.stringify(user));
+                
+                // Show success message
+                showNotification('Compte créé avec succès! Vous êtes maintenant connecté.', true);
+                
+                // Update UI
+                checkLogin();
+                
+                // Reset form
+                registerForm.reset();
+                
+                // Reset button
+                registerBtn.innerHTML = '<i class="fas fa-user-plus"></i> Créer mon compte';
+                registerBtn.disabled = false;
+                
+                // Show success message in form
+                formMessages.innerHTML = '<div class="form-message success">Compte créé avec succès! Redirection vers votre espace...</div>';
+                
+                // Scroll to dashboard
+                setTimeout(() => {
+                    document.getElementById('dashboard').scrollIntoView({behavior: 'smooth'});
+                }, 1000);
+            }, 1500);
+        });
+        
+        // Handle login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Show loading state
+            loginBtn.innerHTML = '<span class="spinner"></span> Connexion en cours...';
+            loginBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Check if user exists
+                const user = JSON.parse(localStorage.getItem('vr_user'));
+                
+                if (user && user.email === email && user.password === password) {
+                    // Login successful
+                    showNotification('Connexion réussie! Bienvenue.', true);
+                    
+                    // Update UI
+                    checkLogin();
+                    
+                    // Reset form
+                    loginForm.reset();
+                    
+                    // Scroll to dashboard
+                    setTimeout(() => {
+                        document.getElementById('dashboard').scrollIntoView({behavior: 'smooth'});
+                    }, 1000);
+                } else {
+                    // Login failed
+                    showNotification('Email ou mot de passe incorrect.', false);
+                    loginMessages.innerHTML = '<div class="form-message error">Email ou mot de passe incorrect</div>';
+                }
+                
+                // Reset button
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Se connecter';
+                loginBtn.disabled = false;
+            }, 1000);
+        });
+        
+        // Handle logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('vr_user');
+            showNotification('Vous avez été déconnecté avec succès.', true);
+            
+            // Hide dashboard, show login/register
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('register').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Handle VR access
+       vrAccessBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Show loading
+    vrAccessBtn.innerHTML = '<span class="spinner"></span> Chargement de l\'expérience VR...';
+    
+    setTimeout(() => {
+        showNotification('Expérience VR lancée avec succès!', true);
+        // Navigate to new page
+        window.location.href = '/demo_page.html'; // or '/vr-experience.html'
+    }, 2000);
+});
+        
+        // Handle VR scene buttons
+        sceneButtons.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                // Highlight active button
+                sceneButtons.forEach(b => b.style.backgroundColor = 'var(--sky-blue)');
+                btn.style.backgroundColor = 'var(--mint-green)';
+                
+                // Update scene
+                const scene = scenes[index];
+                vrScene.innerHTML = `
+                    <h3 class="scene-title">${scene.title}</h3>
+                    <p class="scene-description">${scene.description}</p>
+                `;
+                vrScene.style.background = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${scene.bg}')`;
+                vrScene.style.backgroundSize = 'cover';
+                vrScene.style.backgroundPosition = 'center';
+                
+                // Update icon
+                btn.innerHTML = `<i class="fas ${scene.icon}"></i>`;
+            });
+        });
+        
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                // Skip for buttons with specific actions
+                if (this.classList.contains('btn') || this.id === 'vr-access-btn') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in
+            const isLoggedIn = checkLogin();
+            
+            // Set first scene as active
+            sceneButtons[0].style.backgroundColor = 'var(--mint-green)';
+        });
+    </script>
+</body>
+</html>

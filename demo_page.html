@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR SensoCare - Demo Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Photo Sphere Viewer CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/photo-sphere-viewer@5/dist/photo-sphere-viewer.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --sky-blue: #87CEEB;
+            --mint-green: #98FB98;
+            --light-gray: #f5f5f5;
+            --text-dark: #333;
+            --soft-blue: #e6f7ff;
+            --light-mint: #e8f5e9;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--soft-blue), var(--light-mint));
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .logo i {
+            color: var(--sky-blue);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sky-blue), var(--mint-green));
+            border-radius: 2px;
+        }
+        
+        .gallery-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .demo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .image-container {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .demo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .demo-card:hover .demo-image {
+            transform: scale(1.05);
+        }
+        
+        .demo-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .demo-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--sky-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .demo-description {
+            color: #555;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .demo-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .demo-badge {
+            background: var(--mint-green);
+            color: #155724;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .vr-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 2;
+            cursor: pointer;
+        }
+        
+        .instructions {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .instructions h3 {
+            color: var(--sky-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .instructions li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--mint-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            margin-top: 50px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+        
+        .add-image-comment {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Modal styles for 360 viewer */
+        #psv-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        #psv-modal.active {
+            display: flex;
+        }
+        #psv-container {
+            width: 90vw;
+            height: 90vh;
+            background: #222;
+            border-radius: 10px;
+            position: relative;
+        }
+        #psv-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-vr-cardboard"></i>
+                <h1>VR SensoCare</h1>
+            </div>
+            <p class="tagline">Solutions immersives en réalité virtuelle pour l'autisme et l'orthophonie</p>
+        </header>
+        
+        <main>
+            <h2 class="gallery-title">Démonstrations 360°</h2>
+            <p class="gallery-description">
+                Découvrez nos environnements virtuels spécialement conçus pour l'apaisement sensoriel et la thérapie.
+                Chaque démo offre une expérience immersive unique adaptée aux besoins spécifiques des personnes autistes.
+            </p>
+            
+            <div class="demo-grid">
+                <!-- Demo 1 -->
+                <div class="demo-card">
+                    <div class="image-container">
+                        <div class="vr-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <img src="p2.jpg" 
+                             alt="Plage apaisante" class="demo-image">
+                      
+                    </div>
+                    <div class="demo-info">
+                        <h3 class="demo-title">
+                            <i class="fas fa-water"></i> Plage Sereine
+                        </h3>
+                        <p class="demo-description">
+                            Détendez-vous au bord d'une plage calme avec le bruit régulier des vagues. 
+                            Environnement lumineux mais non éblouissant, avec un contrôle de l'intensité sonore.
+                        </p>
+                        <div class="demo-meta">
+                            <span><i class="fas fa-clock"></i> 10 min</span>
+                            <span class="demo-badge">Apaisement</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Demo 2 -->
+                <div class="demo-card">
+                    <div class="image-container">
+                        <div class="vr-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <img src="p3.jpg" 
+                             alt="Forêt enchantée" class="demo-image">
+                        <div class="add-image-comment">REPLACE IMAGE HERE</div>
+                    </div>
+                    <div class="demo-info">
+                        <h3 class="demo-title">
+                            <i class="fas fa-tree"></i> Forêt Enchantée
+                        </h3>
+                        <p class="demo-description">
+                            Promenez-vous dans une forêt paisible avec des effets sensoriels contrôlés. 
+                            Sons de la nature, lumière douce et textures visuelles apaisantes.
+                        </p>
+                        <div class="demo-meta">
+                            <span><i class="fas fa-clock"></i> 15 min</span>
+                            <span class="demo-badge">Immersion</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Demo 3 -->
+                <div class="demo-card">
+                    <div class="image-container">
+                        <div class="vr-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <img src="p3.jpg" 
+                             alt="Montagne majestueuse" class="demo-image">
+                        <div class="add-image-comment">REPLACE IMAGE HERE</div>
+                    </div>
+                    <div class="demo-info">
+                        <h3 class="demo-title">
+                            <i class="fas fa-mountain"></i> Montagne Majestueuse
+                        </h3>
+                        <p class="demo-description">
+                            Contemplez des paysages de montagne majestueux avec une lumière douce et des couleurs apaisantes. 
+                            Expérience visuelle sans mouvement brusque.
+                        </p>
+                        <div class="demo-meta">
+                            <span><i class="fas fa-clock"></i> 12 min</span>
+                            <span class="demo-badge">Contemplation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Demo 4 -->
+                <div class="demo-card">
+                    <div class="image-container">
+                        <div class="vr-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <img src="p4.jpg" 
+                             alt="Ciel étoilé" class="demo-image">
+                        <div class="add-image-comment">REPLACE IMAGE HERE</div>
+                    </div>
+                    <div class="demo-info">
+                        <h3 class="demo-title">
+                            <i class="fas fa-star"></i> Ciel Étoilé
+                        </h3>
+                        <p class="demo-description">
+                            Observez un ciel étoilé avec des effets visuels doux et apaisants. 
+                            Expérience sensorielle légère idéale pour la relaxation avant le sommeil.
+                        </p>
+                        <div class="demo-meta">
+                            <span><i class="fas fa-clock"></i> 8 min</span>
+                            <span class="demo-badge">Relaxation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Demo 5 -->
+                <div class="demo-card">
+                    <div class="image-container">
+                        <div class="vr-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <img src="p5.jpg" 
+                             alt="Jardin fleuri" class="demo-image">
+                        <div class="add-image-comment">REPLACE IMAGE HERE</div>
+                    </div>
+                    <div class="demo-info">
+                        <h3 class="demo-title">
+                            <i class="fas fa-seedling"></i> Jardin Fleuri
+                        </h3>
+                        <p class="demo-description">
+                            Explorez un jardin coloré avec une variété de fleurs et de plantes. 
+                            Environnement visuel riche mais organisé pour éviter la surcharge sensorielle.
+                        </p>
+                        <div class="demo-meta">
+                            <span><i class="fas fa-clock"></i> 14 min</span>
+                            <span class="demo-badge">Exploration</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Demo 6 -->
+                <div class="demo-card">
+                    <div class="image-container">
+                        <div class="vr-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <img src="p5.jpg" 
+                             alt="Jardin sous la lune" class="demo-image">
+                        <div class="add-image-comment">REPLACE IMAGE HERE</div>
+                    </div>
+                    <div class="demo-info">
+                        <h3 class="demo-title">
+                            <i class="fas fa-moon"></i> Jardin Lunaire
+                        </h3>
+                        <p class="demo-description">
+                            Explorez un jardin magique sous la lumière de la lune. 
+                            Environnement visuel doux avec des éléments interactifs sensoriels légers.
+                        </p>
+                        <div class="demo-meta">
+                            <span><i class="fas fa-clock"></i> 10 min</span>
+                            <span class="demo-badge">Sérénité</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Comment utiliser ces démos</h3>
+                <ul>
+                    <li>Chaque image représente un environnement VR 360° que vous pouvez explorer</li>
+                    <li>Cliquez sur l'icône VR pour lancer l'expérience immersive</li>
+                    <li>Utilisez votre souris ou faites glisser votre doigt pour regarder autour de vous</li>
+                    <li>Ces environnements sont spécialement conçus pour être apaisants et non surchargeants</li>
+                    <li>Adaptez la durée selon les besoins et préférences de l'utilisateur</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 VR SensoCare - Solutions VR pour l'autisme et l'orthophonie</p>
+            <p>Démonstrations 360° pour l'apaisement sensoriel</p>
+        </footer>
+    </div>
+
+    <!-- 360 Viewer Modal -->
+    <div id="psv-modal">
+        <div id="psv-container">
+            <button id="psv-close" title="Fermer">&times;</button>
+        </div>
+    </div>
+
+   <script src="https://unpkg.com/uevent@2/browser.min.js"></script>
+<script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+<script src="https://unpkg.com/photo-sphere-viewer@4.2.0/dist/photo-sphere-viewer.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('psv-modal');
+        const closeBtn = document.getElementById('psv-close');
+        const psvContainer = document.getElementById('psv-container');
+        let viewer = null;
+
+        document.querySelectorAll('.demo-card').forEach(card => {
+            const vrIcon = card.querySelector('.vr-icon');
+            const img = card.querySelector('.demo-image');
+            vrIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // Show modal first
+                modal.classList.add('active');
+                // Clear previous viewer if exists
+                if (viewer) {
+                    viewer.destroy();
+                    viewer = null;
+                }
+                // Remove any leftover canvas or children
+                psvContainer.querySelectorAll('canvas, .psv-container').forEach(el => el.remove());
+                // Wait for next frame to ensure modal is visible and sized
+                setTimeout(() => {
+                    viewer = new PhotoSphereViewer.Viewer({
+                        container: psvContainer,
+                        panorama: img.src,
+                        loadingImg: null,
+                        navbar: [
+                            'zoom',
+                            'move',
+                            'fullscreen'
+                        ],
+                        defaultYaw: 0,
+                        defaultPitch: 0,
+                        mousewheel: true,
+                        touchmoveTwoFingers: false,
+                    });
+                }, 50);
+            });
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            if (viewer) {
+                viewer.destroy();
+                viewer = null;
+            }
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                if (viewer) {
+                    viewer.destroy();
+                    viewer = null;
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

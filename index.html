@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARCHISENS VR - Solutions VR pour l'autisme et l'orthophonie</title>
+    <title>ARCHISENSE VR - Solutions VR pour l'autisme </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -756,6 +756,21 @@
         .logout-btn:hover {
             text-decoration: underline;
         }
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0.5) 0%,
+                rgba(255,255,255,0.7) 50%,
+                rgba(255,255,255,0.9) 100%
+            ), url('https://images.unsplash.com/photo-1605627079912-97c3810a11a4?q=80&w=1107&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') ;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
     </style>
 </head>
 <body>
@@ -780,6 +795,7 @@
                     <li><a href="#catalog"><i class="fas fa-book"></i> Catalogue</a></li>
                     <li><a href="#register"><i class="fas fa-user-plus"></i> Créer un compte</a></li>
                     <li><a href="#login"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+                    
                 </ul>
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -827,9 +843,7 @@
                 <a href="#services" class="btn">
                     <i class="fas fa-concierge-bell"></i> Découvrir nos services
                 </a>
-                <a href="#test-vr" class="btn">
-                    <i class="fas fa-vr-cardboard"></i> Accéder à un test VR gratuit
-                </a>
+               
             </div>
         </div>
     </section>
@@ -956,39 +970,42 @@
                     VR SensoCare est né de la rencontre entre des spécialistes de l'autisme, des orthophonistes et des experts en réalité virtuelle. Notre mission : développer des solutions innovantes pour améliorer le bien-être et les capacités de communication des personnes autistes.
                 </p>
                 
-                <h3 style="text-align: center; margin: 2rem 0 1.5rem; color: var(--sky-blue);">Notre équipe</h3>
+                <h3 style="text-align: center; margin: 2rem 0 1.5rem; color: var(black);">Notre équipe</h3>
                 
                 <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                           <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>Toureche khaled</h4>
+                            <p>Architect spécialisée Dans le Design seuseuriale</p>
+                            </p>
+                        </div>
+                    </div>
+               
                     <div class="team-member">
                         <div class="member-photo">
                             <i class="fas fa-user-md"></i>
                         </div>
                         <div class="member-info">
-                            <h4>Dr Lorem ipsum dolor sit.</h4>
-                            <p>Orthophoniste spécialisée</p>
-                            <p>lor6
-
-                            </p>
+                            <h4>Bourehala chahinaze</h4>
+                            <p>Orthophoniste</p>
                         </div>
                     </div>
-                    
-               
+
                     <div class="team-member">
                         <div class="member-photo">
-                            <i class="fas fa-brain"></i>
+                            <i class="fas fa-user-md"></i>
                         </div>
                         <div class="member-info">
-                            <h4>Élise Dubois</h4>
-                            <p>Lorem ipsum dolor sit amet.</p>
-                            <p>Lorem, ipsum.</p>
+                            <h4>Daghmoum Haithem</h4>
+                            <p>Architecte et Doctorant</p>
                         </div>
                     </div>
                 </div>
                 
-                <h3 style="text-align: center; margin: 3rem 0 1.5rem; color: var(--sky-blue);">Partenaires</h3>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto;">
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque ratione animi obcaecati dolore ex a odio, incidunt facere laboriosam nam!                </p>
-            </div>
+                </div>
         </div>
     </section>
 
@@ -1011,13 +1028,14 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque ratione animi ob
                     <h3>Accompagnement Orthophonique</h3>
                     <p>Séances en ligne ou en centre avec des professionnels spécialisés</p>
                 </div>
-                <div class="service-card">
+
+                <a href="amenagment.html" class="service-card" style="text-decoration: none;">
                     <div class="service-icon">
                         <i class="fas fa-home"></i>
                     </div>
                     <h3>Aménagement d'espaces</h3>
                     <p>Conception de chambres et salles sensorielles adaptées</p>
-                </div>
+                </a>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-users"></i>
@@ -1079,8 +1097,12 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque ratione animi ob
                         </ul>
                     </div>
                 </div>
-                
-                
+
+                <div style="display: flex; justify-content: center; margin-top: 2rem;">
+                    <a href="https://www.youtube.com/watch?v=uBJgmwR9Py4" target="_blank" class="btn" style="background: var(--mint-green); color: var(--text-dark); font-weight: 600; display: inline-block;">
+                        <i class="fas fa-external-link-alt"></i> Aller au video discriptive
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1089,10 +1111,10 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque ratione animi ob
     <section id="exercises">
         <div class="container">
             <div class="dashboard-card">
-                <h2 style="text-align: center; margin-bottom: 1.5rem;">Consignes / Exercices Orthophonie</h2>
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Consignes / Exercices </h2>
                 <div class="status pending" style="margin: 0 auto 1.5rem;">Bientôt disponible</div>
                 <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem;">
-                    Nous travaillons actuellement sur une plateforme d'exercices orthophoniques interactifs avec suivi professionnel. Cette fonctionnalité sera disponible dans les prochaines semaines.
+                    Nous travaillons actuellement sur une plateforme d'exercices  interactifs avec suivi professionnel. Cette fonctionnalité sera disponible dans les prochaines semaines.
                 </p>
                 
                 <div style="background: var(--light-gray); padding: 1.5rem; border-radius: 10px; margin: 2rem 0; text-align: center;">
@@ -1115,10 +1137,9 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque ratione animi ob
                     <h3>VR SensoCare</h3>
                     <p>Solutions innovantes en réalité virtuelle pour l'accompagnement des personnes autistes et le soutien orthophonique.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                     
+                        <a href="#"><i class="fab fa-lin"></i></a>
+                       
                     </div>
                 </div>
                 
@@ -1136,17 +1157,17 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque ratione animi ob
                 <div class="footer-column">
                     <h3>Contact</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Rue Innovation, Paris</a></li>
-                        <li><a href="tel:+33123456789"><i class="fas fa-phone"></i> +33 1 23 45 67 89</a></li>
-                        <li><a href="mailto:contact@vrsensocare.fr"><i class="fas fa-envelope"></i> contact@vrsensocare.fr</a></li>
-                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Lundi-Vendredi: 9h-18h</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> </a></li>
+                        <li><i class="fas fa-phone"></i> +213 542 51 97 19 </a></li>
+                        <li><a href="mailto:contact@ARCHISENSEVR.fr"><i class="fas fa-envelope"></i> contact@ARCHISENSEVR.fr</a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> 24/7</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 VR SensoCare - Tous droits réservés</p>
-                <p>Solutions innovantes pour l'autisme et l'orthophonie</p>
+                <p>&copy; 2025 ARCHISENSE VR - Tous droits réservés</p>
+                <p>Solutions innovantes pour l'autisme </p>
             </div>
         </div>
     </footer>
@@ -1359,7 +1380,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque ratione animi ob
     setTimeout(() => {
         showNotification('Expérience VR lancée avec succès!', true);
         // Navigate to new page
-        window.location.href = '/demo_page.html'; // or '/vr-experience.html'
+        window.location.href = '/vrpage.html'; // or '/vr-experience.html'
     }, 2000);
 });
         

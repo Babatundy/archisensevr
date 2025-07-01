@@ -8,17 +8,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
     <style>
         :root {
-            --primary: #6a5acd;
-            --primary-light: #8c7ae6;
-            --primary-dark: #4a3cb0;
-            --secondary: #ff79c6;
-            --light: #f8f9fa;
-            --dark: #1a1a2e;
-            --success: #50fa7b;
-            --warning: #ffb86c;
-            --gray: #6272a4;
-            --light-gray: #f1f2f6;
-            --card-bg: rgba(26, 26, 46, 0.7);
+            --sky-blue: #87CEEB;
+            --mint-green: #98FB98;
+            --light-gray: #f5f5f5;
+            --text-dark: #333;
+            --soft-blue: #e6f7ff;
+            --light-mint: #e8f5e9;
+            --transition: all 0.3s ease;
         }
         
         * {
@@ -29,28 +25,36 @@
         }
         
         body {
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            color: var(--light);
-            min-height: 100vh;
-            padding-bottom: 2rem;
+            color: var(--text-dark);
+            line-height: 1.6;
             overflow-x: hidden;
-        }
-        
-        header {
-            background: rgba(10, 10, 20, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            border-bottom: 1px solid rgba(149, 117, 205, 0.3);
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0.5) 0%,
+                rgba(255,255,255,0.7) 50%,
+                rgba(255,255,255,0.9) 100%
+            ), url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
         }
         
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint-green));
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .header-content {
@@ -68,25 +72,20 @@
         
         .logo i {
             font-size: 2.8rem;
-            color: var(--secondary);
-            text-shadow: 0 0 10px rgba(255, 121, 198, 0.5);
+            color: white;
         }
         
         h1 {
             font-size: 2.8rem;
             font-weight: 800;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
             margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            letter-spacing: -0.5px;
         }
         
         .subtitle {
             font-size: 1.3rem;
-            color: var(--light-gray);
+            color: white;
             max-width: 800px;
             margin: 0 auto 1rem;
             line-height: 1.6;
@@ -96,16 +95,16 @@
         .section-title {
             text-align: center;
             margin: 3rem 0 2rem;
+            color: var(black);
             position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
         .section-title h2 {
             font-size: 2.5rem;
             display: inline-block;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
             position: relative;
             padding: 0 1.5rem;
         }
@@ -116,25 +115,24 @@
             bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 180px;
+            width: 80px;
             height: 4px;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            background: linear-gradient(to right, var(--sky-blue), var(--mint-green));
             border-radius: 4px;
-            box-shadow: 0 0 10px rgba(140, 122, 230, 0.5);
         }
         
         .section-description {
             text-align: center;
             font-size: 1.1rem;
-            color: var(--light-gray);
+            color: #555;
             max-width: 800px;
             margin: 1.5rem auto 3rem;
             line-height: 1.7;
             font-weight: 300;
-            background: rgba(0, 0, 0, 0.2);
+            background-color: rgba(255,255,255,0.8);
             padding: 1.5rem;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .environments-grid {
@@ -145,49 +143,44 @@
         }
         
         .environment-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border-radius: 18px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transform-style: preserve-3d;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            position: relative;
+            backdrop-filter: blur(5px);
         }
         
         .environment-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
-                        0 0 30px rgba(140, 122, 230, 0.2);
-            border-color: rgba(149, 117, 205, 0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
         }
         
-        .card-header {
-            padding: 1.8rem 1.8rem 1.2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-header::before {
+        .environment-card::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            background: linear-gradient(to right, var(--sky-blue), var(--mint-green));
+        }
+        
+        .card-header {
+            padding: 1.8rem 1.8rem 1.2rem;
+            border-bottom: 1px solid #eee;
         }
         
         .card-header h3 {
             font-size: 1.7rem;
             margin-bottom: 0.8rem;
-            color: var(--primary-light);
+            color: var(--sky-blue);
             font-weight: 700;
         }
         
         .card-header p {
-            color: var(--light-gray);
+            color: #666;
             line-height: 1.7;
             font-size: 1rem;
             min-height: 100px;
@@ -208,41 +201,21 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(135, 206, 235, 0.1);
             padding: 1rem;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            border: 1px solid rgba(135, 206, 235, 0.2);
         }
         
         .time-option:hover {
-            background: rgba(106, 90, 205, 0.3);
-            transform: translateY(-3px);
+            background: rgba(135, 206, 235, 0.2);
         }
         
         .time-option.selected {
-            background: rgba(106, 90, 205, 0.5);
-            border: 1px solid var(--primary-light);
-            box-shadow: 0 0 15px rgba(140, 122, 230, 0.4);
-        }
-        
-        .time-option::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .time-option.selected::after {
-            opacity: 1;
+            background: rgba(135, 206, 235, 0.3);
+            border: 1px solid var(--sky-blue);
         }
         
         .time-option input {
@@ -256,13 +229,14 @@
             font-size: 1.1rem;
             cursor: pointer;
             font-weight: 500;
+            color: #555;
         }
         
         .view-button {
             display: block;
             width: 100%;
             padding: 1.1rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint-green));
             color: white;
             border: none;
             border-radius: 12px;
@@ -270,32 +244,12 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 1.8rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .view-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-            z-index: -1;
+            transition: var(--transition);
         }
         
         .view-button:hover {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .view-button:hover::before {
-            left: 100%;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
         
         .view-button i {
@@ -345,12 +299,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .pannellum-button:hover {
-            background: rgba(106, 90, 205, 0.7);
+            background: var(--sky-blue);
             transform: scale(1.1);
         }
         
@@ -358,23 +312,23 @@
             position: absolute;
             bottom: 25px;
             left: 25px;
-            background: rgba(10, 10, 20, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             padding: 1.2rem 1.8rem;
             border-radius: 15px;
             max-width: 350px;
             z-index: 1001;
-            border: 1px solid rgba(149, 117, 205, 0.3);
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(135, 206, 235, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .environment-info h3 {
-            color: var(--primary-light);
+            color: var(--sky-blue);
             margin-bottom: 0.8rem;
             font-size: 1.6rem;
         }
         
         .environment-info p {
-            color: var(--light-gray);
+            color: #555;
             line-height: 1.6;
         }
         
@@ -395,8 +349,8 @@
         .spinner {
             width: 70px;
             height: 70px;
-            border: 7px solid rgba(106, 90, 205, 0.3);
-            border-top: 7px solid var(--primary-light);
+            border: 7px solid rgba(135, 206, 235, 0.3);
+            border-top: 7px solid var(--sky-blue);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 2rem;
@@ -408,7 +362,7 @@
         }
         
         .loading-text {
-            color: var(--light-gray);
+            color: white;
             font-size: 1.4rem;
             text-align: center;
         }
@@ -425,7 +379,7 @@
         .progress {
             height: 100%;
             width: 0%;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            background: linear-gradient(to right, var(--sky-blue), var(--mint-green));
             transition: width 0.3s ease;
         }
         
@@ -433,11 +387,10 @@
             text-align: center;
             margin-top: 6rem;
             padding: 3rem;
-            color: var(--light-gray);
+            color: white;
             font-size: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            background: rgba(10, 10, 20, 0.5);
-            backdrop-filter: blur(5px);
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint-green));
+            border-top: 1px solid rgba(255,255,255,0.2);
         }
         
         @media (max-width: 768px) {
@@ -468,18 +421,28 @@
                 transform: translateX(-50%);
                 bottom: 15px;
             }
+            
+            body {
+                background-attachment: scroll;
+            }
         }
     </style>
 </head>
 <body>
     <header>
+        <div style="position: absolute; top: 18px; left: 24px; z-index: 200;"></div>
+            <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; background: rgba(135,206,235,0.95); color: #fff; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: background 0.2s;">
+                <i class="fas fa-arrow-left"></i>
+                Retour
+            </a>
+        </div>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
                     <i class="fas fa-vr-cardboard"></i>
-                    <h1>VR SensoCare</h1>
+                    <h1>ARCHISENSE VR</h1>
                 </div>
-                <p class="subtitle">Solutions immersives en réalité virtuelle pour l’audiologie et l’orthophonie</p>
+                <p class="subtitle">Solutions immersives en réalité virtuelle pour l'audiologie </p>
             </div>
         </div>
     </header>
@@ -488,26 +451,16 @@
         <div class="section-title">
             <h2>Démonstrations 360°</h2>
         </div>
-        <p class="section-description">Découvrez nos environnements virtuels spécialement conçus pour l’apaisement sensoriel et la thérapie. Chaque démo offre une expérience immersive unique adaptée aux besoins spécifiques des personnes autistes.</p>
+        <p class="section-description">Découvrez nos environnements virtuels spécialement conçus pour l'apaisement sensoriel et la thérapie. Chaque démo offre une expérience immersive unique adaptée aux besoins spécifiques des personnes autistes.</p>
 
         <div class="environments-grid">
             <!-- Plage Sereline -->
             <div class="environment-card">
                 <div class="card-header">
-                    <h3>Plage Sereline</h3>
-                    <p>Détendez-vous au bord d’une plage calme avec le bruit équilibré des vagues. Environnement adaptable dans tous les établissements, avec un contrôle de l’intensité sensorielle.</p>
+                    <h3>Jardain Sensoriel</h3>
+                   
                 </div>
                 <div class="card-content">
-                    <div class="time-options">
-                        <div class="time-option">
-                            <input type="checkbox" id="plage-0">
-                            <label for="plage-0">0 min</label>
-                        </div>
-                        <div class="time-option">
-                            <input type="checkbox" id="plage-1">
-                            <label for="plage-1">1 min</label>
-                        </div>
-                    </div>
                     <button class="view-button" data-env="plage">Voir en VR <i class="fas fa-glasses"></i></button>
                 </div>
             </div>
@@ -516,19 +469,8 @@
             <div class="environment-card">
                 <div class="card-header">
                     <h3>Forêt Enchantée</h3>
-                    <p>Promenez-vous dans une forêt paisible avec des effets sensoriels subtils. Sons de la nature, lumière douce et textures virtuelles apaisantes.</p>
                 </div>
                 <div class="card-content">
-                    <div class="time-options">
-                        <div class="time-option">
-                            <input type="checkbox" id="foret-5">
-                            <label for="foret-5">5 min</label>
-                        </div>
-                        <div class="time-option">
-                            <input type="checkbox" id="foret-6">
-                            <label for="foret-6">6 min</label>
-                        </div>
-                    </div>
                     <button class="view-button" data-env="foret">Voir en VR <i class="fas fa-glasses"></i></button>
                 </div>
             </div>
@@ -536,41 +478,20 @@
             <!-- Montagne Majestueuse -->
             <div class="environment-card">
                 <div class="card-header">
-                    <h3>Montagne Majestueuse</h3>
-                    <p>Contemplez des paysages de montagne majestueux avec une lumière douce et des couleurs apaisantes. Expérience visuelle sans mouvement brusque.</p>
+                    <h3>Salle Multisenseriale</h3>
+                    
                 </div>
                 <div class="card-content">
-                    <div class="time-options">
-                        <div class="time-option">
-                            <input type="checkbox" id="montagne-17">
-                            <label for="montagne-17">17 min</label>
-                        </div>
-                        <div class="time-option">
-                            <input type="checkbox" id="montagne-19">
-                            <label for="montagne-19">19 min</label>
-                        </div>
-                    </div>
                     <button class="view-button" data-env="montagne">Voir en VR <i class="fas fa-glasses"></i></button>
                 </div>
             </div>
 
-            <!-- Jardin Fleuri -->
+         
             <div class="environment-card">
                 <div class="card-header">
-                    <h3>Jardin Fleuri</h3>
-                    <p>Explorez un jardin calme avec une variété de fleurs aux tons pastels. Environnement visuel riche mais organisé pour éviter la surcharge sensorielle.</p>
+                    <h3>Salle D'appaisemenet</h3>
                 </div>
                 <div class="card-content">
-                    <div class="time-options">
-                        <div class="time-option">
-                            <input type="checkbox" id="jardin-14">
-                            <label for="jardin-14">14 min</label>
-                        </div>
-                        <div class="time-option">
-                            <input type="checkbox" id="jardin-15">
-                            <label for="jardin-15">15 min</label>
-                        </div>
-                    </div>
                     <button class="view-button" data-env="jardin">Voir en VR <i class="fas fa-glasses"></i></button>
                 </div>
             </div>
@@ -578,20 +499,9 @@
             <!-- Jardin Lunaire -->
             <div class="environment-card">
                 <div class="card-header">
-                    <h3>Jardin Lunaire</h3>
-                    <p>Découvrez un jardin magique sous la lumière de la lune. Environnement visuel riche avec des éléments interactifs sensoriels légers.</p>
+                    <h3>Jardin Senseriale </h3>
                 </div>
                 <div class="card-content">
-                    <div class="time-options">
-                        <div class="time-option">
-                            <input type="checkbox" id="lunaire-10">
-                            <label for="lunaire-10">10 min</label>
-                        </div>
-                        <div class="time-option">
-                            <input type="checkbox" id="lunaire-16">
-                            <label for="lunaire-16">16 min</label>
-                        </div>
-                    </div>
                     <button class="view-button" data-env="lunaire">Voir en VR <i class="fas fa-glasses"></i></button>
                 </div>
             </div>
@@ -612,8 +522,8 @@
             </button>
         </div>
         <div class="environment-info">
-            <h3 id="currentEnvName">Plage Sereline</h3>
-            <p id="currentEnvDesc">Détendez-vous au bord d’une plage calme...</p>
+            <h3 id="currentEnvName">jardain sensoriel</h3>
+            <p id="currentEnvDesc">Détendez-vous au bord d'une plage calme...</p>
         </div>
         
         <div class="loading-overlay" id="loadingOverlay">
@@ -629,7 +539,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 VR SensoCare - Solutions immersives en réalité virtuelle pour la thérapie sensorielle</p>
+            <p>&copy; ARCHISENSE VR - Solutions immersives en réalité virtuelle pour la thérapie sensorielle</p>
         </div>
     </footer>
 
@@ -650,29 +560,24 @@
         // Environment data with image paths
         const environmentData = {
             plage: {
-                name: 'Plage Sereline',
-                desc: 'Détendez-vous au bord d’une plage calme avec le bruit équilibré des vagues. Environnement adaptable dans tous les établissements, avec un contrôle de l’intensité sensorielle.',
-                image: 'images/p5.jpg'
+                name: 'jardain sensoriel',
+                image: 'images/p1.jpg'
             },
             foret: {
                 name: 'Forêt Enchantée',
-                desc: 'Promenez-vous dans une forêt paisible avec des effets sensoriels subtils. Sons de la nature, lumière douce et textures virtuelles apaisantes.',
-                image: 'images/p2.jpg'
+                image: 'images/p3.jpg'
             },
             montagne: {
-                name: 'Montagne Majestueuse',
-                desc: 'Contemplez des paysages de montagne majestueux avec une lumière douce et des couleurs apaisantes. Expérience visuelle sans mouvement brusque.',
+                name: 'salle multisenseriale',
                 image: 'images/p5.jpg'
             },
             jardin: {
-                name: 'Jardin Fleuri',
-                desc: 'Explorez un jardin calme avec une variété de fleurs aux tons pastels. Environnement visuel riche mais organisé pour éviter la surcharge sensorielle.',
-                image: 'images/p5.jpg'
+                name: "Salle D'appaisemenet",
+                image: 'images/p4.jpg'
             },
             lunaire: {
-                name: 'Jardin Lunaire',
-                desc: 'Découvrez un jardin magique sous la lumière de la lune. Environnement visuel riche avec des éléments interactifs sensoriels légers.',
-                image: 'images/p5.jpg'
+                name: 'Jardin Senseriale',
+                image: 'images/p6.jpg'
             }
         };
         
@@ -712,7 +617,7 @@
                         "pitch": -2,
                         "yaw": 0,
                         "type": "info",
-                        "text": "Bienvenue dans VR SensoCare"
+                        "text": "Bienvenue dans ARCHISENSE VR"
                     }
                 ]
             });
